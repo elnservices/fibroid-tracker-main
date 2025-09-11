@@ -22,6 +22,7 @@ export type Database = {
           first_name: string
           id: number
           last_name: string
+          password: string | null
         }
         Insert: {
           created_at?: string
@@ -30,6 +31,7 @@ export type Database = {
           first_name: string
           id?: number
           last_name: string
+          password?: string | null
         }
         Update: {
           created_at?: string
@@ -38,6 +40,46 @@ export type Database = {
           first_name?: string
           id?: number
           last_name?: string
+          password?: string | null
+        }
+        Relationships: []
+      }
+      symptom_logs: {
+        Row: {
+          bleeding: number
+          created_at: string
+          fatigue: number
+          id: string
+          log_date: string
+          pain: number
+          pressure: number
+          total_score: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          bleeding?: number
+          created_at?: string
+          fatigue?: number
+          id?: string
+          log_date?: string
+          pain?: number
+          pressure?: number
+          total_score?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          bleeding?: number
+          created_at?: string
+          fatigue?: number
+          id?: string
+          log_date?: string
+          pain?: number
+          pressure?: number
+          total_score?: number | null
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }
