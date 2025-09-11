@@ -7,7 +7,10 @@ import { ScoreDisplay } from '@/components/ScoreDisplay';
 import { WeeklyChart } from '@/components/WeeklyChart';
 import { OnboardingFlow } from '@/components/OnboardingFlow';
 import UserMenu from '@/components/UserMenu';
-import { Heart, Calendar, TrendingUp, FileText } from 'lucide-react';
+import { Heart, Calendar, TrendingUp, FileText, Database as DatabaseIcon } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { useAuth } from '@/hooks/useAuth';
+import { useToast } from '@/hooks/use-toast';
 
 export interface SymptomData {
   date: string;
@@ -30,6 +33,9 @@ const Index = () => {
   const [weeklyData, setWeeklyData] = useState<SymptomData[]>([]);
   const [todayLogged, setTodayLogged] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
+  const { user } = useAuth();
+  const { toast } = useToast();
+  const [seeding, setSeeding] = useState(false);
 
   // Check onboarding status and load today's data
   useEffect(() => {
@@ -117,6 +123,41 @@ const Index = () => {
         });
         setTodayLogged(true);
       }
+    }
+  };
+  const seedSampleLogs = async () => {
+    if (!user) {
+      toast({ title: "Not signed in", description: "Please log in to seed sample data.", variant: "destructive" });
+      return;
+    }
+    setSeeding(true);
+    try {
+      const today = new Date();
+      const entries = Array.from({ length: 20 }).map((_, i) => {
+        const d = new Date(today);
+        d.setDate(today.getDate() - i);
+        const pain = Math.floor(Math.random() * 4);
+        const bleeding = Math.floor(Math.random() * 4);
+        const fatigue = Math.floor(Math.random() * 4);
+        const pressure = Math.floor(Math.random() * 4);
+        return {
+          user_id: user.id,
+          log_date: d.toISOString().slice(0, 10),
+          pain,
+          bleeding,
+          fatigue,
+          pressure,
+        };
+      });
+      const { error } = await supabase
+        .from('symptom_logs')
+        .upsert(entries, { onConflict: 'user_id,log_date', ignoreDuplicates: true });
+      if (error) throw error;
+      toast({ title: "Seed complete", description: "Added sample logs for the last 20 days." });
+    } catch (e: any) {
+      toast({ title: "Seeding failed", description: e?.message || "Please try again.", variant: "destructive" });
+    } finally {
+      setSeeding(false);
     }
   };
 
@@ -234,6 +275,16 @@ const Index = () => {
             <FileText className="w-6 h-6 mx-auto mb-2 text-primary" />
             <p className="text-sm font-medium">Export</p>
             <p className="text-xs text-muted-foreground">Share with doctor</p>
+          </Card>
+
+          <Card
+            onClick={!seeding ? seedSampleLogs : undefined}
+            aria-disabled={seeding}
+            className={`bg-gradient-card border-0 shadow-soft p-4 text-center cursor-pointer hover:shadow-glow transition-all ${seeding ? 'opacity-50 pointer-events-none' : ''}`}
+          >
+            <DatabaseIcon className="w-6 h-6 mx-auto mb-2 text-primary" />
+            <p className="text-sm font-medium">{seeding ? 'Seeding...' : 'Seed Sample Data'}</p>
+            <p className="text-xs text-muted-foreground">Add 20 logs for last 20 days</p>
           </Card>
         </div>
       </div>
