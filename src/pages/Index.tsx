@@ -6,6 +6,7 @@ import { SymptomLogger } from '@/components/SymptomLogger';
 import { ScoreDisplay } from '@/components/ScoreDisplay';
 import { WeeklyChart } from '@/components/WeeklyChart';
 import { OnboardingFlow } from '@/components/OnboardingFlow';
+import UserMenu from '@/components/UserMenu';
 import { Heart, Calendar, TrendingUp, FileText } from 'lucide-react';
 
 export interface SymptomData {
@@ -128,12 +129,15 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-background via-primary-light/5 to-secondary/10">
       {/* Header */}
       <div className="bg-gradient-primary text-primary-foreground p-6 rounded-b-3xl shadow-soft">
-        <div className="max-w-md mx-auto">
-          <h1 className="text-2xl font-bold mb-2 flex items-center gap-2">
-            <Heart className="w-6 h-6" />
-            Fibroid Tracker
-          </h1>
-          <p className="text-primary-foreground/80">Monitor your symptoms with ease</p>
+        <div className="max-w-md mx-auto flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold mb-2 flex items-center gap-2">
+              <Heart className="w-6 h-6" />
+              Fibroid Tracker
+            </h1>
+            <p className="text-primary-foreground/80">Monitor your symptoms with ease</p>
+          </div>
+          <UserMenu />
         </div>
       </div>
 
