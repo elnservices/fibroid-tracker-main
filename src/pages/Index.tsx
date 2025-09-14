@@ -7,7 +7,7 @@ import { ScoreDisplay } from '@/components/ScoreDisplay';
 import { WeeklyChart } from '@/components/WeeklyChart';
 import { OnboardingFlow } from '@/components/OnboardingFlow';
 import UserMenu from '@/components/UserMenu';
-import { Heart, Calendar, TrendingUp, FileText, Database as DatabaseIcon } from 'lucide-react';
+import { Heart, Calendar, TrendingUp, FileText, Database as DatabaseIcon, BarChart } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
@@ -285,6 +285,15 @@ const Index = () => {
             <DatabaseIcon className="w-6 h-6 mx-auto mb-2 text-primary" />
             <p className="text-sm font-medium">{seeding ? 'Seeding...' : 'Seed Sample Data'}</p>
             <p className="text-xs text-muted-foreground">Add 20 logs for last 20 days</p>
+          </Card>
+
+          <Card
+            onClick={() => window.location.href = '/admin'}
+            className="bg-gradient-card border-0 shadow-soft p-4 text-center cursor-pointer hover:shadow-glow transition-all"
+          >
+            <BarChart className="w-6 h-6 mx-auto mb-2 text-primary" />
+            <p className="text-sm font-medium">Admin Dashboard</p>
+            <p className="text-xs text-muted-foreground">View data analytics</p>
           </Card>
         </div>
       </div>
