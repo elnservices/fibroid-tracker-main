@@ -8,7 +8,6 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import AdminDashboard from "./pages/AdminDashboard";
-import Welcome from "./pages/Welcome";
 import ProfileSetup from "./pages/ProfileSetup";
 import Calendar from "./pages/Calendar";
 import TrendsReports from "./pages/TrendsReports";
@@ -26,7 +25,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Welcome />} />
+            <Route path="/" element={<Auth />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/profile-setup" element={
               <ProtectedRoute>
