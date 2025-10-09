@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -7,7 +8,7 @@ import { ScoreDisplay } from '@/components/ScoreDisplay';
 import { WeeklyChart } from '@/components/WeeklyChart';
 import { OnboardingFlow } from '@/components/OnboardingFlow';
 import UserMenu from '@/components/UserMenu';
-import { Heart, Calendar, TrendingUp, FileText, Database as DatabaseIcon, BarChart } from 'lucide-react';
+import { Heart, Calendar, TrendingUp, FileText, BarChart } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
@@ -265,36 +266,37 @@ const Index = () => {
 
         {/* Quick Actions */}
         <div className="grid grid-cols-2 gap-4">
-          <Card className="bg-gradient-card border-0 shadow-soft p-4 text-center cursor-pointer hover:shadow-glow transition-all">
-            <TrendingUp className="w-6 h-6 mx-auto mb-2 text-primary" />
-            <p className="text-sm font-medium">Insights</p>
-            <p className="text-xs text-muted-foreground">View trends</p>
-          </Card>
+          <Link to="/calendar">
+            <Card className="bg-gradient-card border-0 shadow-soft p-4 text-center cursor-pointer hover:shadow-glow transition-all">
+              <Calendar className="w-6 h-6 mx-auto mb-2 text-primary" />
+              <p className="text-sm font-medium">Calendar</p>
+              <p className="text-xs text-muted-foreground">View history</p>
+            </Card>
+          </Link>
           
-          <Card className="bg-gradient-card border-0 shadow-soft p-4 text-center cursor-pointer hover:shadow-glow transition-all">
-            <FileText className="w-6 h-6 mx-auto mb-2 text-primary" />
-            <p className="text-sm font-medium">Export</p>
-            <p className="text-xs text-muted-foreground">Share with doctor</p>
-          </Card>
+          <Link to="/trends">
+            <Card className="bg-gradient-card border-0 shadow-soft p-4 text-center cursor-pointer hover:shadow-glow transition-all">
+              <TrendingUp className="w-6 h-6 mx-auto mb-2 text-primary" />
+              <p className="text-sm font-medium">Trends</p>
+              <p className="text-xs text-muted-foreground">View insights</p>
+            </Card>
+          </Link>
 
-          <Card
-            onClick={!seeding ? seedSampleLogs : undefined}
-            aria-disabled={seeding}
-            className={`bg-gradient-card border-0 shadow-soft p-4 text-center cursor-pointer hover:shadow-glow transition-all ${seeding ? 'opacity-50 pointer-events-none' : ''}`}
-          >
-            <DatabaseIcon className="w-6 h-6 mx-auto mb-2 text-primary" />
-            <p className="text-sm font-medium">{seeding ? 'Seeding...' : 'Seed Sample Data'}</p>
-            <p className="text-xs text-muted-foreground">Add 20 logs for last 20 days</p>
-          </Card>
+          <Link to="/education">
+            <Card className="bg-gradient-card border-0 shadow-soft p-4 text-center cursor-pointer hover:shadow-glow transition-all">
+              <FileText className="w-6 h-6 mx-auto mb-2 text-primary" />
+              <p className="text-sm font-medium">Education</p>
+              <p className="text-xs text-muted-foreground">Learn more</p>
+            </Card>
+          </Link>
 
-          <Card
-            onClick={() => window.location.href = '/admin'}
-            className="bg-gradient-card border-0 shadow-soft p-4 text-center cursor-pointer hover:shadow-glow transition-all"
-          >
-            <BarChart className="w-6 h-6 mx-auto mb-2 text-primary" />
-            <p className="text-sm font-medium">Admin Dashboard</p>
-            <p className="text-xs text-muted-foreground">View data analytics</p>
-          </Card>
+          <Link to="/settings">
+            <Card className="bg-gradient-card border-0 shadow-soft p-4 text-center cursor-pointer hover:shadow-glow transition-all">
+              <BarChart className="w-6 h-6 mx-auto mb-2 text-primary" />
+              <p className="text-sm font-medium">Settings</p>
+              <p className="text-xs text-muted-foreground">Preferences</p>
+            </Card>
+          </Link>
         </div>
       </div>
     </div>

@@ -8,6 +8,12 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import AdminDashboard from "./pages/AdminDashboard";
+import Welcome from "./pages/Welcome";
+import ProfileSetup from "./pages/ProfileSetup";
+import Calendar from "./pages/Calendar";
+import TrendsReports from "./pages/TrendsReports";
+import Education from "./pages/Education";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,10 +26,36 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
+            <Route path="/welcome" element={<Welcome />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/profile-setup" element={
+              <ProtectedRoute>
+                <ProfileSetup />
+              </ProtectedRoute>
+            } />
             <Route path="/" element={
               <ProtectedRoute>
                 <Index />
+              </ProtectedRoute>
+            } />
+            <Route path="/calendar" element={
+              <ProtectedRoute>
+                <Calendar />
+              </ProtectedRoute>
+            } />
+            <Route path="/trends" element={
+              <ProtectedRoute>
+                <TrendsReports />
+              </ProtectedRoute>
+            } />
+            <Route path="/education" element={
+              <ProtectedRoute>
+                <Education />
+              </ProtectedRoute>
+            } />
+            <Route path="/settings" element={
+              <ProtectedRoute>
+                <Settings />
               </ProtectedRoute>
             } />
             <Route path="/admin" element={

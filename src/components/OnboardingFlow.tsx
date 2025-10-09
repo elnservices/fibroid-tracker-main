@@ -13,8 +13,8 @@ const onboardingSteps = [
   {
     icon: Heart,
     title: "Welcome to Fibroid Tracker",
-    description: "Track your fibroid symptoms easily and gain valuable insights into your health patterns.",
-    features: ["Daily symptom logging", "Visual score tracking", "Weekly insights"]
+    description: "Track. Understand. Take Control of Your Health.",
+    features: ["Track fibroids, endometriosis & PCOS", "Visual charts & insights", "Comprehensive doctor reports"]
   },
   {
     icon: Clock,
@@ -24,15 +24,15 @@ const onboardingSteps = [
   },
   {
     icon: BarChart3,
-    title: "Insights & Patterns",
-    description: "Discover patterns in your symptoms and understand what factors might be affecting your health.",
-    features: ["Weekly trend analysis", "Correlation insights", "Progress tracking"]
+    title: "What Can You Track?",
+    description: "Log comprehensive symptoms to understand your reproductive health patterns.",
+    features: ["Pain levels & locations", "Bleeding intensity", "Fatigue & mood", "Pelvic pressure"]
   },
   {
     icon: FileText,
-    title: "Share with Your Doctor",
-    description: "Export comprehensive reports to share with your healthcare provider for better treatment decisions.",
-    features: ["Monthly summaries", "Exportable PDFs", "Treatment planning support"]
+    title: "Your Privacy Matters",
+    description: "We take your health data security seriously.",
+    features: ["Encrypted data storage", "You own your data", "Export or delete anytime", "HIPAA compliant"]
   }
 ];
 
