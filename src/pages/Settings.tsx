@@ -145,7 +145,7 @@ const Settings = () => {
         </Card>
 
         <div className="flex justify-center">
-          <Link to="/">
+          <Link to="/dashboard">
             <Button variant="outline">Back to Dashboard</Button>
           </Link>
         </div>

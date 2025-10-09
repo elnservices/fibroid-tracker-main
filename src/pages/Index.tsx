@@ -266,7 +266,7 @@ const Index = () => {
 
         {/* Quick Actions */}
         <div className="grid grid-cols-2 gap-4">
-          <Link to="/calendar">
+          <Link to="/calendar" className="block">
             <Card className="bg-gradient-card border-0 shadow-soft p-4 text-center cursor-pointer hover:shadow-glow transition-all">
               <Calendar className="w-6 h-6 mx-auto mb-2 text-primary" />
               <p className="text-sm font-medium">Calendar</p>
@@ -274,7 +274,7 @@ const Index = () => {
             </Card>
           </Link>
           
-          <Link to="/trends">
+          <Link to="/trends" className="block">
             <Card className="bg-gradient-card border-0 shadow-soft p-4 text-center cursor-pointer hover:shadow-glow transition-all">
               <TrendingUp className="w-6 h-6 mx-auto mb-2 text-primary" />
               <p className="text-sm font-medium">Trends</p>
@@ -282,7 +282,7 @@ const Index = () => {
             </Card>
           </Link>
 
-          <Link to="/education">
+          <Link to="/education" className="block">
             <Card className="bg-gradient-card border-0 shadow-soft p-4 text-center cursor-pointer hover:shadow-glow transition-all">
               <FileText className="w-6 h-6 mx-auto mb-2 text-primary" />
               <p className="text-sm font-medium">Education</p>
@@ -290,7 +290,7 @@ const Index = () => {
             </Card>
           </Link>
 
-          <Link to="/settings">
+          <Link to="/settings" className="block">
             <Card className="bg-gradient-card border-0 shadow-soft p-4 text-center cursor-pointer hover:shadow-glow transition-all">
               <BarChart className="w-6 h-6 mx-auto mb-2 text-primary" />
               <p className="text-sm font-medium">Settings</p>

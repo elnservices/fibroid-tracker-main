@@ -177,7 +177,7 @@ const Calendar = () => {
               ) : selectedDate ? (
                 <div className="text-center py-8 text-muted-foreground">
                   <p>No symptoms logged for this date</p>
-                  <Link to="/">
+                  <Link to="/dashboard">
                     <Button className="mt-4" size="sm">
                       Log Symptoms
                     </Button>
@@ -193,7 +193,7 @@ const Calendar = () => {
         </div>
 
         <div className="flex justify-center">
-          <Link to="/">
+          <Link to="/dashboard">
             <Button variant="outline">Back to Dashboard</Button>
           </Link>
         </div>
