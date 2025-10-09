@@ -1,4 +1,4 @@
-import { Settings as SettingsIcon, Bell, Shield, Download, Trash2 } from 'lucide-react';
+import { Settings as SettingsIcon, Bell, Shield, Download, Trash2, MessageCircle, Mail, Phone } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
@@ -131,16 +131,54 @@ const Settings = () => {
 
         <Card>
           <CardHeader>
-            <CardTitle>Support</CardTitle>
-            <CardDescription>Get help or contact us</CardDescription>
+            <CardTitle>Support & Help</CardTitle>
+            <CardDescription>Get assistance when you need it</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-3">
-            <p className="text-sm text-muted-foreground">
-              For questions or support, please contact us at support@fibroidtracker.com
-            </p>
-            <p className="text-sm text-muted-foreground">
-              Version 1.0.0
-            </p>
+          <CardContent className="space-y-4">
+            <div className="border rounded-lg p-4 space-y-3">
+              <div className="flex items-center gap-2">
+                <MessageCircle className="h-5 w-5 text-primary" />
+                <h3 className="font-semibold">Live Chat Support</h3>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                Chat with our support team in real-time
+              </p>
+              <Button className="w-full">
+                <MessageCircle className="mr-2 h-4 w-4" />
+                Start Live Chat
+              </Button>
+            </div>
+
+            <Separator />
+
+            <div className="space-y-3">
+              <h3 className="font-semibold text-sm">Other Support Options</h3>
+              
+              <div className="flex items-center gap-3 text-sm">
+                <Mail className="h-4 w-4 text-muted-foreground" />
+                <div>
+                  <p className="font-medium">Email Support</p>
+                  <p className="text-muted-foreground">support@fibroidtracker.com</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 text-sm">
+                <Phone className="h-4 w-4 text-muted-foreground" />
+                <div>
+                  <p className="font-medium">Phone Support</p>
+                  <p className="text-muted-foreground">1-800-FIBROID (Mon-Fri, 9am-5pm)</p>
+                </div>
+              </div>
+            </div>
+
+            <Separator />
+            
+            <div className="flex justify-between items-center text-sm text-muted-foreground">
+              <span>Version 1.0.0</span>
+              <Button variant="link" size="sm">
+                Help Center
+              </Button>
+            </div>
           </CardContent>
         </Card>
 

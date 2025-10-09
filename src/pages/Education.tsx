@@ -1,4 +1,4 @@
-import { BookOpen, FileText, Heart, Info } from 'lucide-react';
+import { BookOpen, FileText, Heart, Info, Newspaper, ExternalLink, Users } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import UserMenu from '@/components/UserMenu';
@@ -21,6 +21,50 @@ const Education = () => {
       title: 'PCOS Management',
       description: 'Information about Polycystic Ovary Syndrome and lifestyle tips',
       icon: FileText,
+    },
+  ];
+
+  const medicalNews = [
+    {
+      title: 'New Treatment Options for Fibroids Show Promise',
+      date: '2025-01-15',
+      source: 'Medical Research Journal',
+      summary: 'Recent clinical trials demonstrate effectiveness of minimally invasive procedures...',
+    },
+    {
+      title: 'Understanding Hormonal Impacts on Fibroid Growth',
+      date: '2025-01-10',
+      source: 'Reproductive Health Today',
+      summary: 'Latest research reveals how hormonal fluctuations affect fibroid development...',
+    },
+    {
+      title: 'Lifestyle Changes That May Help Manage Symptoms',
+      date: '2025-01-05',
+      source: 'Women\'s Health Institute',
+      summary: 'Evidence-based dietary and exercise recommendations for symptom management...',
+    },
+  ];
+
+  const supportOrganizations = [
+    {
+      name: 'The Fibroid Foundation',
+      description: 'Support, education, and advocacy for those affected by fibroids',
+      url: 'https://fibroidfoundation.org',
+    },
+    {
+      name: 'Endometriosis Association',
+      description: 'Resources and support for endometriosis patients worldwide',
+      url: 'https://endometriosisassn.org',
+    },
+    {
+      name: 'PCOS Awareness Association',
+      description: 'Information and community support for PCOS management',
+      url: 'https://pcosaa.org',
+    },
+    {
+      name: 'National Women\'s Health Network',
+      description: 'Independent voice for women\'s health advocacy',
+      url: 'https://nwhn.org',
     },
   ];
 
@@ -60,6 +104,27 @@ const Education = () => {
 
         <Card>
           <CardHeader>
+            <div className="flex items-center gap-2">
+              <Newspaper className="h-5 w-5" />
+              <CardTitle>Medical News & Research</CardTitle>
+            </div>
+            <CardDescription>Recent updates and research in reproductive health</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {medicalNews.map((news, idx) => (
+                <div key={idx} className="border-l-4 border-primary pl-4 py-2">
+                  <h3 className="font-semibold text-sm mb-1">{news.title}</h3>
+                  <p className="text-xs text-muted-foreground mb-2">{news.source} • {news.date}</p>
+                  <p className="text-sm text-muted-foreground">{news.summary}</p>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
             <CardTitle>Learning Resources</CardTitle>
             <CardDescription>Educational materials about reproductive health conditions</CardDescription>
           </CardHeader>
@@ -77,6 +142,33 @@ const Education = () => {
                   </Card>
                 );
               })}
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <Users className="h-5 w-5" />
+              <CardTitle>Support Organizations</CardTitle>
+            </div>
+            <CardDescription>Connect with communities and resources</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              {supportOrganizations.map((org, idx) => (
+                <div key={idx} className="flex items-start justify-between border rounded-lg p-4 hover:bg-accent transition-colors">
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-sm mb-1">{org.name}</h3>
+                    <p className="text-sm text-muted-foreground">{org.description}</p>
+                  </div>
+                  <Button variant="ghost" size="sm" asChild>
+                    <a href={org.url} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
+                  </Button>
+                </div>
+              ))}
             </div>
           </CardContent>
         </Card>

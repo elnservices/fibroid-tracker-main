@@ -43,10 +43,11 @@ const ProfileSetup = () => {
   ];
 
   const goals = [
-    { id: 'awareness', label: 'Health Awareness', icon: '🎯' },
-    { id: 'tracking', label: 'Symptom Tracking', icon: '📊' },
-    { id: 'doctor_report', label: 'Doctor Reports', icon: '📋' },
-    { id: 'fertility', label: 'Fertility Planning', icon: '👶' },
+    { id: 'awareness', label: 'Awareness - Understanding my symptoms', icon: '🎯' },
+    { id: 'tracking', label: 'Symptom tracking - Daily monitoring', icon: '📊' },
+    { id: 'doctor_report', label: 'Doctor report - Medical appointment preparation', icon: '📋' },
+    { id: 'treatment', label: 'Treatment monitoring - Track effectiveness', icon: '💊' },
+    { id: 'fertility', label: 'Fertility planning - Reproductive health', icon: '👶' },
   ];
 
   const handleGoalToggle = (goalId: string) => {
@@ -205,22 +206,37 @@ const ProfileSetup = () => {
 
             {/* Step 2: Health Info */}
             {step === 2 && (
-              <div className="space-y-4">
-                <Label>What brings you here?</Label>
-                <RadioGroup
-                  value={formData.diagnosis}
-                  onValueChange={(value) => setFormData(prev => ({ ...prev, diagnosis: value }))}
-                  className="space-y-3"
-                >
-                  {diagnoses.map((diagnosis) => (
-                    <div key={diagnosis.value} className="flex items-center space-x-3 border rounded-lg p-4 hover:bg-accent transition-colors">
-                      <RadioGroupItem value={diagnosis.value} id={diagnosis.value} />
-                      <Label htmlFor={diagnosis.value} className="font-normal cursor-pointer flex-1">
-                        {diagnosis.label}
-                      </Label>
-                    </div>
-                  ))}
-                </RadioGroup>
+              <div className="space-y-6">
+                <div className="space-y-4">
+                  <Label>What brings you here?</Label>
+                  <RadioGroup
+                    value={formData.diagnosis}
+                    onValueChange={(value) => setFormData(prev => ({ ...prev, diagnosis: value }))}
+                    className="space-y-3"
+                  >
+                    {diagnoses.map((diagnosis) => (
+                      <div key={diagnosis.value} className="flex items-center space-x-3 border rounded-lg p-4 hover:bg-accent transition-colors">
+                        <RadioGroupItem value={diagnosis.value} id={diagnosis.value} />
+                        <Label htmlFor={diagnosis.value} className="font-normal cursor-pointer flex-1">
+                          {diagnosis.label}
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                </div>
+
+                <div className="space-y-3">
+                  <Label htmlFor="reproductive-history">Reproductive Health History (Optional)</Label>
+                  <textarea
+                    id="reproductive-history"
+                    className="w-full min-h-[100px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    placeholder="Share any relevant reproductive health history, previous diagnoses, treatments, surgeries, or medications..."
+                    onChange={(e) => setFormData(prev => ({ ...prev, age: e.target.value }))}
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    This information helps provide more personalized tracking and insights
+                  </p>
+                </div>
               </div>
             )}
 

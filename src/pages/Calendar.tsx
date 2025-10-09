@@ -65,6 +65,13 @@ const Calendar = () => {
     return 'bg-red-500';
   };
 
+  const getSeverityEmoji = (score: number) => {
+    if (score <= 5) return '😊';
+    if (score <= 10) return '😐';
+    if (score <= 15) return '😣';
+    return '😰';
+  };
+
   const handleDateClick = (date: Date) => {
     setSelectedDate(date);
     const log = getLogForDate(date);
@@ -121,7 +128,7 @@ const Calendar = () => {
                       key={idx}
                       onClick={() => handleDateClick(date)}
                       className={`
-                        aspect-square p-2 rounded-lg border transition-all
+                        aspect-square p-1 rounded-lg border transition-all relative
                         ${isSameMonth(date, currentMonth) ? 'text-foreground' : 'text-muted-foreground'}
                         ${isSelected ? 'ring-2 ring-primary' : ''}
                         hover:bg-accent
@@ -129,7 +136,10 @@ const Calendar = () => {
                     >
                       <div className="text-sm">{format(date, 'd')}</div>
                       {log && (
-                        <div className={`w-2 h-2 rounded-full mx-auto mt-1 ${getSeverityColor(log.total_score || 0)}`} />
+                        <div className="flex items-center justify-center gap-1 mt-0.5">
+                          <div className={`w-2 h-2 rounded-full ${getSeverityColor(log.total_score || 0)}`} />
+                          <span className="text-xs">{getSeverityEmoji(log.total_score || 0)}</span>
+                        </div>
                       )}
                     </button>
                   );

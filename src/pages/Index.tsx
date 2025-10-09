@@ -8,7 +8,7 @@ import { ScoreDisplay } from '@/components/ScoreDisplay';
 import { WeeklyChart } from '@/components/WeeklyChart';
 import { OnboardingFlow } from '@/components/OnboardingFlow';
 import UserMenu from '@/components/UserMenu';
-import { Heart, Calendar, TrendingUp, FileText, BarChart } from 'lucide-react';
+import { Heart, Calendar, TrendingUp, FileText, BarChart, Bell, FileBarChart } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
@@ -249,13 +249,36 @@ const Index = () => {
           </Card>
         )}
 
+        {/* Dashboard Snapshot Widgets */}
+        <div className="grid grid-cols-2 gap-4">
+          {/* Calendar Summary */}
+          <Card className="bg-gradient-card border-0 shadow-soft p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <Calendar className="w-5 h-5 text-primary" />
+              <h3 className="font-semibold text-sm">This Week</h3>
+            </div>
+            <p className="text-2xl font-bold">{weeklyData.slice(-7).length}</p>
+            <p className="text-xs text-muted-foreground">Days logged</p>
+          </Card>
+
+          {/* Upcoming Reminders */}
+          <Card className="bg-gradient-card border-0 shadow-soft p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <Bell className="w-5 h-5 text-primary" />
+              <h3 className="font-semibold text-sm">Reminders</h3>
+            </div>
+            <p className="text-2xl font-bold">3</p>
+            <p className="text-xs text-muted-foreground">Due today</p>
+          </Card>
+        </div>
+
         {/* Weekly Overview */}
         {weeklyData.length > 0 && (
           <Card className="bg-gradient-card border-0 shadow-soft">
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
-                <Calendar className="w-5 h-5" />
-                7-Day Overview
+                <TrendingUp className="w-5 h-5" />
+                7-Day Trend
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -263,6 +286,26 @@ const Index = () => {
             </CardContent>
           </Card>
         )}
+
+        {/* Last Report Status */}
+        <Card className="bg-gradient-card border-0 shadow-soft">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
+                  <FileBarChart className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <p className="font-semibold">Monthly Report</p>
+                  <p className="text-sm text-muted-foreground">Last generated 3 days ago</p>
+                </div>
+              </div>
+              <Link to="/trends">
+                <Button variant="ghost" size="sm">View</Button>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Quick Actions */}
         <div className="grid grid-cols-2 gap-4">
