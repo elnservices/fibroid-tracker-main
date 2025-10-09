@@ -1,4 +1,4 @@
-import { Settings as SettingsIcon, Bell, Shield, Download, Trash2, MessageCircle, Mail, Phone } from 'lucide-react';
+import { Settings as SettingsIcon, Bell, Shield, Download, Trash2, MessageCircle, Mail, Phone, Watch, Check, X } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
@@ -16,6 +16,60 @@ const Settings = () => {
     medicationReminder: false,
     weeklyReport: true,
   });
+
+  const [connectedDevices, setConnectedDevices] = useState({
+    appleWatch: false,
+    fitbit: false,
+    garmin: false,
+    samsungWatch: false,
+  });
+
+  const smartwatches = [
+    { 
+      id: 'appleWatch',
+      name: 'Apple Watch', 
+      description: 'Sync health and activity data',
+      icon: '⌚',
+      color: 'text-slate-600'
+    },
+    { 
+      id: 'fitbit',
+      name: 'Fitbit', 
+      description: 'Track activity, sleep, and heart rate',
+      icon: '🏃',
+      color: 'text-teal-600'
+    },
+    { 
+      id: 'garmin',
+      name: 'Garmin', 
+      description: 'Monitor fitness and wellness metrics',
+      icon: '🎯',
+      color: 'text-blue-600'
+    },
+    { 
+      id: 'samsungWatch',
+      name: 'Samsung Galaxy Watch', 
+      description: 'Connect health and fitness tracking',
+      icon: '⚡',
+      color: 'text-indigo-600'
+    },
+  ];
+
+  const handleDeviceToggle = (deviceId: string) => {
+    const isCurrentlyConnected = connectedDevices[deviceId as keyof typeof connectedDevices];
+    
+    setConnectedDevices(prev => ({
+      ...prev,
+      [deviceId]: !prev[deviceId as keyof typeof prev]
+    }));
+
+    toast({
+      title: isCurrentlyConnected ? 'Device Disconnected' : 'Device Connected',
+      description: isCurrentlyConnected 
+        ? 'Your device has been disconnected successfully'
+        : 'Your device has been connected successfully',
+    });
+  };
 
   const handleExportData = () => {
     toast({
@@ -93,6 +147,62 @@ const Settings = () => {
                 }
               />
             </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <div className="flex items-center gap-2">
+              <Watch className="h-5 w-5" />
+              <CardTitle>Smartwatch Integration</CardTitle>
+            </div>
+            <CardDescription>Connect your smartwatch to sync health data automatically</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-4">
+              <p className="text-sm text-muted-foreground">
+                <strong>Sync Data:</strong> Activity levels, heart rate, sleep patterns, and step count can be automatically tracked and correlated with your symptoms.
+              </p>
+            </div>
+
+            {smartwatches.map((device, idx) => (
+              <div key={device.id}>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3 flex-1">
+                    <div className={`text-3xl ${device.color}`}>
+                      {device.icon}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2">
+                        <Label className="font-semibold">{device.name}</Label>
+                        {connectedDevices[device.id as keyof typeof connectedDevices] && (
+                          <span className="flex items-center gap-1 text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded-full">
+                            <Check className="h-3 w-3" />
+                            Connected
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-sm text-muted-foreground">{device.description}</p>
+                    </div>
+                  </div>
+                  <Button
+                    variant={connectedDevices[device.id as keyof typeof connectedDevices] ? "outline" : "default"}
+                    size="sm"
+                    onClick={() => handleDeviceToggle(device.id)}
+                  >
+                    {connectedDevices[device.id as keyof typeof connectedDevices] ? (
+                      <>
+                        <X className="h-4 w-4 mr-1" />
+                        Disconnect
+                      </>
+                    ) : (
+                      'Connect'
+                    )}
+                  </Button>
+                </div>
+                {idx < smartwatches.length - 1 && <Separator className="mt-4" />}
+              </div>
+            ))}
           </CardContent>
         </Card>
 
