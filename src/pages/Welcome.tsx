@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Heart } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
+import logo from '@/assets/logo.jpg';
 
 const Welcome = () => {
   const navigate = useNavigate();
@@ -31,9 +31,7 @@ const Welcome = () => {
     <div className="min-h-screen bg-gradient-to-br from-background via-primary-light/5 to-secondary/10 flex items-center justify-center p-4">
       <div className="max-w-md w-full text-center space-y-8">
         <div className="flex justify-center">
-          <div className="h-24 w-24 rounded-full bg-primary/10 flex items-center justify-center">
-            <Heart className="h-12 w-12 text-primary" />
-          </div>
+          <img src={logo} alt="App Logo" className="h-32 w-32 object-contain" />
         </div>
         
         <div className="space-y-4">
