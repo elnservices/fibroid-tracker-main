@@ -1,16 +1,19 @@
-import { Settings as SettingsIcon, Bell, Shield, Download, Trash2, MessageCircle, Mail, Phone, Watch, Check, X } from 'lucide-react';
+import { Settings as SettingsIcon, Bell, Shield, Download, Trash2, MessageCircle, Mail, Phone, Watch, Check, X, LogOut } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import UserMenu from '@/components/UserMenu';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
+import { useAuth } from '@/hooks/useAuth';
 
 const Settings = () => {
   const { toast } = useToast();
+  const { signOut } = useAuth();
+  const navigate = useNavigate();
   const [notifications, setNotifications] = useState({
     dailyReminder: true,
     medicationReminder: false,
@@ -84,6 +87,15 @@ const Settings = () => {
       description: 'Please contact support to delete your account data.',
       variant: 'destructive',
     });
+  };
+
+  const handleLogout = async () => {
+    await signOut();
+    toast({
+      title: 'Logged Out',
+      description: 'You have been successfully logged out.',
+    });
+    navigate('/auth');
   };
 
   return (
@@ -234,6 +246,17 @@ const Settings = () => {
               <Button variant="destructive" onClick={handleDeleteData}>
                 <Trash2 className="h-4 w-4 mr-2" />
                 Delete
+              </Button>
+            </div>
+            <Separator />
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <Label>Log Out</Label>
+                <p className="text-sm text-muted-foreground">Sign out of your account</p>
+              </div>
+              <Button variant="outline" onClick={handleLogout}>
+                <LogOut className="h-4 w-4 mr-2" />
+                Log Out
               </Button>
             </div>
           </CardContent>
